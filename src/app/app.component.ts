@@ -23,19 +23,20 @@ export class AppComponent {
 
   gridType$: Observable<Weapons>;
 
-  type: number;
+  winnerState$: Observable<boolean[]>;
+
+  won: boolean[];
+  
 
   constructor(private store: Store<GmaeState>){
     this.store.dispatch(GameActions.enterGame());
     this.store.dispatch(GameActions.randomPlayerPick());
     this.game$ = this.store.select('game');
     this.gridType$ = this.store.select(appstate => appstate.game.turn.weapon);
-    this.board$ = this.store.select(appstate => appstate.game.board)
-    this.type = -1;
-    
-    this.gridType$.pipe(take(1)).subscribe(value => {
-      this.type = value;
-    })
+    this.board$ = this.store.select(appstate => appstate.game.board);
+    this.winnerState$ = this.store.select(appstate => appstate.game.board_winner_state);
+    this.won = [];
+
     
   }
 
@@ -45,7 +46,6 @@ export class AppComponent {
 
   onBoardClick(item: number)
   {
-    console.log(this.type)
     switch (item){
       case 0:
         this.store.dispatch(GameActions.move({gridIndex: item}))

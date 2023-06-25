@@ -22,9 +22,10 @@ const initalState: Game = {
     players: [pa, pb],
     turn: randomNumber() === 1 ? pa : pb,
     whoClicked: null,
-    isFinished:false,
+    isFinished: false,
     winner: null,
-    status: 'Playing'
+    status: 'Playing',
+    board_winner_state: [],
 } 
 
 function randomNumber()
@@ -34,8 +35,7 @@ function randomNumber()
 
 function move(state: Game , index: number){
 
-    const type = state.turn.weapon === Weapons.CROSS ? 'X' : 'O';
-    console.log(index, type)
+    const type = state.turn?.weapon === Weapons.CROSS ? 'X' : 'O';
     
     const newBoard = state.board.map((value, i) => i === index ? value = type : value)
     const newTurn = state.turn === pa ? pb : pa; 
@@ -66,48 +66,87 @@ function checkifFinished(state: Game){
 
 function checkWinner(state: Game)
 {
-    console.log('check winner')
 
     const board = state.board;
     if ((board[0] === board[1] && board[1] === board[2]) && board[0] !== '')
     {
         const player = board[0] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[0] = true;
+        winnerState[1] = true;
+        winnerState[2] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else if ((board[0] === board[3] && board[3] === board[6]) && board[0] !== '')
     {
         const player = board[0] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[0] = true;
+        winnerState[3] = true;
+        winnerState[6] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else if ((board[2] === board[5] && board[5] === board[8]) && board[2] !== '')
     {
         const player = board[2] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[2] = true;
+        winnerState[5] = true;
+        winnerState[8] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else if ((board[6] === board[7] && board[7] === board[8]) && board[6] !== '')
     {
         const player = board[6] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[6] = true;
+        winnerState[7] = true;
+        winnerState[8] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else if ((board[1] === board[4] && board[4] === board[7]) && board[1] !== '')
     {
         const player = board[1] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[1] = true;
+        winnerState[4] = true;
+        winnerState[7] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else if ((board[3] === board[4] && board[4] === board[5]) && board[3] !== '')
     {
         const player = board[3] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[3] = true;
+        winnerState[4] = true;
+        winnerState[5] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else if ((board[0] === board[4] && board[4] === board[8]) && board[0] !== '')
     {
         const player = board[0] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[0] = true;
+        winnerState[4] = true;
+        winnerState[8] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else if ((board[2] === board[4] && board[4] === board[6]) && board[2] !== '')
     {
         const player = board[2] === 'X' ? pb : pa;
-        return {...state, winner: player}
+        const winnerState = [];
+        winnerState[2] = true;
+        winnerState[4] = true;
+        winnerState[6] = true;
+    
+        return {...state, winner: player, board_winner_state: winnerState}
     }
     else {
         if(state.isFinished && state.winner === null)

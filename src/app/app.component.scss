@@ -34,8 +34,8 @@
                     border-radius: 50%;
                     border: 5px solid white;
                     position: absolute;
-                    left: 25%;
-                    top: 25%;
+                    left: 22%;
+                    top: 22%;
                 }
             }
 
@@ -85,13 +85,28 @@
 button {
     width: 100%;
     font-size: 1.2rem;
-    background-color: darkgrey;
+    background-color: rgb(104, 101, 101);
     color: white;
     font-weight: bold;
     border: none;
     padding: 1rem;
     cursor: pointer;
+    margin-top: 1rem;
     &:hover, &:focus {
         background-color: darkolivegreen;
+    }
+}
+
+.win::after, .win::before {
+    background-color: greenyellow !important;
+}
+.winner {
+    color: yellowgreen;
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        min-width: 100vw;
     }
 }

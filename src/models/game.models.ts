@@ -8,5 +8,6 @@ export interface Game
     whoClicked: Player | null,
     isFinished: boolean,
     winner: Player | null,
-    status: string | null
+    status: string | null,
+    board_winner_state: boolean[];
 }

@@ -1,14 +1,17 @@
 <div class="status" >
-    <p> TURN: PLAYER {{ (game$ | async)?.turn?.name }}</p>
+    <p *ngIf="!(game$ | async)?.isFinished"> TURN: {{ (game$ | async)?.isFinished ? '-' : 'Player ' + (game$ | async)?.turn?.name + ' - '}}
+        <span  *ngIf="(game$ | async)?.turn?.weapon === 0" >X</span>    
+        <span  *ngIf="(game$ | async)?.turn?.weapon === 1" >O</span>    
+    </p>
     <p> Game Status: {{(game$ | async)?.status}}</p>
-    <p> Winner: {{(game$ | async)?.winner?.name}}</p>
+    <p class="winner" *ngIf="(game$ | async)?.winner"> Winner: Player {{(game$ | async)?.winner?.name}}</p>
 </div>
 <div class="container" [ngClass]="{'disabled' : (game$ | async)?.isFinished}">
     
-    <div class="board"   >
-        <div class="grid-item" *ngFor="let item of board$ | async; let i = index" (click)="onBoardClick(i)">
-            <div *ngIf="item === 'O'" class="circle"></div>
-            <div *ngIf="item === 'X'" class="cross"></div>
+    <div class="board"    >
+        <div class="grid-item" *ngFor="let item of board$ | async; let i = index;" (click)="onBoardClick(i)">
+            <div *ngIf="item === 'O'" class="circle" [ngClass]="{ 'win' : (winnerState$ | async)![i] === true  }"></div>
+            <div *ngIf="item === 'X'" class="cross" [ngClass]="{ 'win' : (winnerState$ | async)![i] === true }"></div>
         </div>
     </div>
 </div>
