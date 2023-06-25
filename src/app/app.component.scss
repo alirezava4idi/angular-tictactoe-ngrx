@@ -21,9 +21,9 @@
             align-items: center;
             position: relative;
             
-            &:hover, &:focus {
-                background-color: darkolivegreen;
-            }
+            // &:hover {
+            //     background-color: darkolivegreen;
+            // }
 
             .circle {
                 display: flex;

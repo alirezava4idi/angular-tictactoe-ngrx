@@ -10,8 +10,8 @@
     
     <div class="board"    >
         <div class="grid-item" *ngFor="let item of board$ | async; let i = index;" (click)="onBoardClick(i)">
-            <div *ngIf="item === 'O'" class="circle" [ngClass]="{ 'win' : (winnerState$ | async)![i] === true  }"></div>
-            <div *ngIf="item === 'X'" class="cross" [ngClass]="{ 'win' : (winnerState$ | async)![i] === true }"></div>
+            <div *ngIf="item === 'O'" class="circle " [ngClass]="{ 'win' : (winnerState$ | async)![i] === true  }"></div>
+            <div *ngIf="item === 'X'" class="cross " [ngClass]="{ 'win' : (winnerState$ | async)![i] === true }"></div>
         </div>
     </div>
 </div>

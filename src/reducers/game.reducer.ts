@@ -35,9 +35,11 @@ function randomNumber()
 
 function move(state: Game , index: number){
 
+    if (state.board[index] !== '') return state;
+
     const type = state.turn?.weapon === Weapons.CROSS ? 'X' : 'O';
     
-    const newBoard = state.board.map((value, i) => i === index ? value = type : value)
+    const newBoard = state.board.map((value, i) => (i === index && value === '') ? value = type : value)
     const newTurn = state.turn === pa ? pb : pa; 
     const updated: Game = {...state, board: [...newBoard], whoClicked: state.turn, turn: newTurn }
     return updated
