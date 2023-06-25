@@ -1,6 +1,7 @@
 .container
 {
-    width: 700px;
+    min-width: 500px;
+    max-width: 700px;
     aspect-ratio: 1;
 
     background-color: black;
@@ -62,14 +63,31 @@
         }
     }
 
-    .status{
-        color: wheat;
-    }
 
 
+
+}
+.status{
+    padding: 2rem;
+    font-size: 1.2rem;
+    border: 1px solid black;
 }
 
 .disabled {
     pointer-events: none;
     opacity: .4;
+}
+
+button {
+    width: 100%;
+    font-size: 1.2rem;
+    background-color: darkgrey;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    &:hover {
+        background-color: darkolivegreen;
+    }
 }

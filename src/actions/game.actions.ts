@@ -20,3 +20,7 @@ export const move = createAction(
 export const gameFinished = createAction(
     '[Game] Game Is Finished'
 )
+
+export const gameReset = createAction(
+    '[Game] Reset'
+)

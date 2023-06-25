@@ -1,14 +1,16 @@
+<div class="status" >
+    <p> TURN: PLAYER {{ (game$ | async)?.turn?.name }}</p>
+    <p> Game Status: {{(game$ | async)?.status}}</p>
+    <p> Winner: {{(game$ | async)?.winner?.name}}</p>
+</div>
 <div class="container" [ngClass]="{'disabled' : (game$ | async)?.isFinished}">
+    
     <div class="board"   >
         <div class="grid-item" *ngFor="let item of board$ | async; let i = index" (click)="onBoardClick(i)">
             <div *ngIf="item === 'O'" class="circle"></div>
             <div *ngIf="item === 'X'" class="cross"></div>
         </div>
     </div>
-
-    <div class="status" >
-        TURN: PLAYER {{ (game$ | async)?.turn?.name }}
-        Game Status: {{(game$ | async)?.status}}
-        Winner: {{(game$ | async)?.winner?.name}}
-    </div>
 </div>
+
+<button (click)="reset()">Reset</button>

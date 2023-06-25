@@ -16,14 +16,15 @@ const pb: Player = {
 }
 
 
+
 const initalState: Game = {
     board: ['','','','','','','','','',],
     players: [pa, pb],
-    turn: pa,
+    turn: randomNumber() === 1 ? pa : pb,
     whoClicked: null,
     isFinished:false,
     winner: null,
-    status: null
+    status: 'Playing'
 } 
 
 function randomNumber()
@@ -47,7 +48,7 @@ function checkifFinished(state: Game){
 
     if (updatedState.winner !== null)
     {
-        updatedState = {...updatedState, isFinished: true}
+        updatedState = {...updatedState, isFinished: true, status: 'Finished'}
         return updatedState;
     }
 
@@ -123,5 +124,8 @@ export const gameReducer = createReducer(
     on(GameActions.enterGame, state => (state)),
     on(GameActions.randomPlayerPick, (state) => ({...state, turn: state.players[randomNumber()]})),
     on(GameActions.move, (state, { gridIndex }) => (move(state, gridIndex))),
-    on(GameActions.gameFinished, state => (checkifFinished(state)))
+    on(GameActions.gameFinished, state => (checkifFinished(state))),
+    on(GameActions.gameReset, (state) => ( 
+        {...initalState, turn: randomNumber() === 1 ? pa : pb}
+    ))
 )

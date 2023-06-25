@@ -39,6 +39,9 @@ export class AppComponent {
     
   }
 
+  reset() {
+    this.store.dispatch(GameActions.gameReset());
+  }
 
   onBoardClick(item: number)
   {
